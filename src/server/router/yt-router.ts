@@ -2,6 +2,7 @@ import { createRouter } from './context'
 import { z } from 'zod'
 import ytSearch from 'yt-search'
 import youtubedl from 'youtube-dl-exec'
+import { lookup } from 'geoip-lite'
 import _ from 'lodash'
 import axios from 'axios'
 import { endpoints } from '~/utils/constants'
@@ -68,10 +69,18 @@ export const youtubeRouter = createRouter()
       title: z.string(),
       url: z.string(),
     }),
-    async resolve({ input }) {
-      try {
-        logger.info(`getting audio url from: ${input.url}`)
+    async resolve({ input, ctx }) {
+      const ip = ctx.req?.headers['x-forwarded-for'] || ctx.req?.socket.remoteAddress
 
+      console.log('ip', ip)
+
+      const ipInfo = ip ? lookup(ip.toString()) : null
+
+      console.log('ipInfo', ipInfo)
+
+      logger.info(`getting audio url from: ${input.url}`)
+
+      try {
         const key = `getAudioUrl-${input.url}`
 
         const cachedResult = await cache.get(key)
@@ -85,6 +94,7 @@ export const youtubeRouter = createRouter()
         const response = (await youtubedl(input.url, {
           format: 'bestaudio',
           geoBypass: true,
+          geoBypassCountry: ipInfo?.country,
           getUrl: true,
           getTitle: true,
         })) as unknown as string
