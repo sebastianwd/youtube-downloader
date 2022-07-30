@@ -2,7 +2,6 @@ import * as React from 'react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { trpc } from '../utils/trpc'
-import { lowerCase, startCase } from 'lodash'
 
 const Home: NextPage = () => {
   const [url, setUrl] = React.useState('')
@@ -36,7 +35,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="container mx-auto flex flex-col items-center h-screen p-4 pt-[25%] md:pt-[5%]">
-        <h1 className="text-3xl md:text-7xl leading-normal font-bold text-gray-700 mb-8 text-center">
+        <h1 className="text-3xl md:text-7xl leading-normal font-bold text-gray-200 mb-8 text-center">
           <span className="text-red-700">YouTube</span> downloader
         </h1>
         <p className="text-2xl mb-2">Enter a video url</p>
@@ -44,6 +43,7 @@ const Home: NextPage = () => {
           value={url}
           onChange={(e) => setUrl(e.target.value)}
           placeholder="https://www.youtube.com/watch?..."
+          name="url"
           className="bg-slate-600 px-2 py-1 rounded-md outline-none hover:outline-gray-500 w-full md:w-1/2 focus:outline-gray-500  transition-all text-lg mb-8"
         />
         <div className="flex items-center mb-4">
@@ -55,7 +55,7 @@ const Home: NextPage = () => {
                 value={downloadOptions[key].value}
                 name="download-type"
                 checked={downloadType === key}
-                disabled={currentFetcher.isRefetching}
+                disabled={currentFetcher.isFetching}
                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 focus:ring-2"
                 onChange={(e) => {
                   setDownloadType(e.target.value as 'audio' | 'video')
