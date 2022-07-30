@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 2,
+  "dockerfileLines": [
+    "FROM nikolaik/python-nodejs:python3.9-nodejs14-alpine",
+    "RUN mkdir -p /usr/src/app",
+    "WORKDIR /usr/src/app",
+    "COPY ./package.json /usr/src/app/",
+    "RUN npm install && npm cache clean --force",
+    "COPY ./ /usr/src/app",
+    "ENV NODE_ENV production",
+    "ENV PORT 4000",
+    "RUN npm run build",
+    "EXPOSE 4000",
+    "CMD [ \"npm\", \"start -p 4000\" ]"
+  ]
+}
