@@ -9,6 +9,9 @@
     "COPY ./ /usr/src/app",
     "ENV NODE_ENV production",
     "ENV PORT 4000",
+    "ENV YT_COOKIE=${YT_COOKIE}",
+    "ENV X_YT_ID_TOKEN=${X_YT_ID_TOKEN}",
+    "ENV YOUTUBE_API_KEY=${YOUTUBE_API_KEY}",
     "RUN npm run build",
     "EXPOSE 4000",
     "CMD [ \"npm\", \"start -p 4000\" ]"
