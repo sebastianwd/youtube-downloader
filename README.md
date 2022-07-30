@@ -1,4 +1,6 @@
-![Uptime Robot status](https://img.shields.io/uptimerobot/status/m792364614-efb97cc75c86a1d0087a83d8?style=flat-square)
+
+ <img src="https://img.shields.io/uptimerobot/status/m792364614-efb97cc75c86a1d0087a83d8?style=flat-square"
+            alt="fUptime Robot status">
 
 ## YouTube downloader
 
