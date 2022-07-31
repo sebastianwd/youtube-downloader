@@ -6,7 +6,7 @@
 
 This is an app bootstrapped according to the [init.tips](https://init.tips) stack, also known as the T3-Stack.
 
-Download audio and video from YouTube.
+Download audio and video from YouTube. Since the server is running on a single region, some videos might not be available if client region is a different one.
 
 ### Use the [website](https://yt-api.caprover.kodokku.xyz)
 
